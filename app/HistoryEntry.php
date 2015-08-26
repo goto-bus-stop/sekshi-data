@@ -32,5 +32,4 @@ class HistoryEntry extends Model
     {
         return $this->embedsOne('App\HistoryEntryScore');
     }
-
 }
