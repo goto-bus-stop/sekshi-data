@@ -1,4 +1,4 @@
-<div class="history-entry">
+<div class="history-entry" data-entry-id="{{ $entry->id }}">
     <img src="{{ $entry->mediaM->image }}" alt="Image">
     <div class="meta">
         <a class="media" href="{{ url('media', $entry->mediaM->cid) }}">
@@ -15,7 +15,9 @@
                 {{ $entry->djM->username or '?' }}
             @endif
         </span>
-        <span class="time">{{ $entry->time or '0000-00-00 00:00:00' }}</span>
+        <time class="time" datetime="{{ $entry->time->toW3CString() }}">
+            {{ $entry->time or '0000-00-00 00:00:00' }}
+        </time>
     </div>
     <div class="score">
         <div class="woots">
