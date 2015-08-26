@@ -7,7 +7,10 @@
             This song was played {{ $history->total() }} times.
         </p>
         @if ($lover)
-            <p>{{ $lover->username }} loves this song the most: they played it {{ $loverCount }} times.</p>
+            <p>
+                <a href="{{ user_url($lover) }}">{{ $lover->username }}</a>
+                loves this song the most: they played it {{ $loverCount }} times.
+            </p>
         @endif
         <div class="embed">
             @if ($media->format === 1)
