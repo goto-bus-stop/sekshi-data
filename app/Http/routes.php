@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Route::get('/history', function () {
     return view('history.show', [
-        'entries' => App\HistoryEntry::orderBy('time', 'desc')->paginate(50)
+        'entries' => App\HistoryEntry::orderBy('time', 'desc')
+                                     ->whereNotNull('media')
+                                     ->paginate(50)
     ]);
 });
 
