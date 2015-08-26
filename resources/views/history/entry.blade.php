@@ -1,4 +1,4 @@
-<div class="history-entry" data-entry-id="{{ $entry->id }}">
+<div class="history-list-row" data-entry-id="{{ $entry->id }}">
     <img src="{{ $entry->mediaM->image }}" alt="Image">
     <div class="meta">
         <a class="media" href="{{ url('media', $entry->mediaM->cid) }}">
