@@ -4,7 +4,17 @@
         <a class="media" href="{{ url('media', $entry->mediaM->cid) }}">
             {{ $entry->mediaM->full_title }}
         </a>
-        <span class="dj">{{ $entry->djM->username or '?' }}</span>
+        <span class="dj">
+            @if (!is_null($entry->djM))
+                @if (!empty($entry->djM->slug))
+                    <a href="{{ url('user', $entry->djM->slug) }}">{{ $entry->djM->username or '?' }}</a>
+                @else
+                    <a href="{{ url('user', $entry->djM->id) }}">{{ $entry->djM->username or '?' }}</a>
+                @endif
+            @else
+                {{ $entry->djM->username or '?' }}
+            @endif
+        </span>
         <span class="time">{{ $entry->time or '0000-00-00 00:00:00' }}</span>
     </div>
     <div class="score">
