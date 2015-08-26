@@ -6,11 +6,7 @@
         </a>
         <span class="dj">
             @if (!is_null($entry->djM))
-                @if (!empty($entry->djM->slug))
-                    <a href="{{ url('user', $entry->djM->slug) }}">{{ $entry->djM->username or '?' }}</a>
-                @else
-                    <a href="{{ url('user', $entry->djM->id) }}">{{ $entry->djM->username or '?' }}</a>
-                @endif
+                <a href="{{ user_url($entry->djM) }}">{{ $entry->djM->username or '?' }}</a>
             @else
                 {{ $entry->djM->username or '?' }}
             @endif
