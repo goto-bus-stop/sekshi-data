@@ -16,7 +16,24 @@ Route::get('/', function () {
 });
 
 Route::get('/history', function () {
-    return view('history.list', [
+    return view('history.show', [
         'entries' => App\HistoryEntry::orderBy('time', 'desc')->paginate(50)
+    ]);
+});
+
+Route::get('/media/{cid}', function ($cid) {
+    $media = App\Media::where('cid', '=', $cid)->first();
+    $mostPlayed = App\HistoryEntry::pipeline(
+        [ '$match' => [ 'media' => $media->raw_id ] ],
+        [ '$group' => [ '_id' => '$dj', 'count' => [ '$sum' => 1 ] ] ],
+        [ '$sort' => [ 'count' => -1 ] ],
+        [ '$limit' => 1 ]
+    )[0];
+    $lover = isset($mostPlayed['_id']) ? App\User::find($mostPlayed['_id']) : null;
+    return view('media.show', [
+        'media' => $media,
+        'history' => $media->history()->paginate(25),
+        'lover' => $lover,
+        'loverCount' => $lover ? $mostPlayed['count'] : 0
     ]);
 });

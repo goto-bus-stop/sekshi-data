@@ -56,7 +56,7 @@ a {
         width: auto;
         height: 74px;
     }
-        .history .meta span {
+        .history .meta > * {
             position: absolute;
             top: 15px;
             overflow: hidden;
