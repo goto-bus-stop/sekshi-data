@@ -30,6 +30,7 @@ a {
     }
     .pagination > li:first-child > a,
     .pagination > li:first-child > span { margin-left: 0; }
+/* /.pagination */
 
 /* largely stolen from plug.dj :O */
 .history {}
@@ -141,3 +142,12 @@ a {
         }
     /* /.paginate */
 /* /.history */
+
+.emotes {
+    margin: auto;
+    margin-bottom: 100px;
+}
+    .emotes th {
+        min-width: 200px;
+    }
+/* /.emotes */

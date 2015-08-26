@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/emotes', function () {
+    return view('emotes.show', [
+        'emotes' => App\Emote::all()
+    ]);
+});
+
 Route::get('/history', function () {
     return view('history.show', [
         'entries' => App\HistoryEntry::orderBy('time', 'desc')
