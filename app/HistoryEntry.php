@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Jenssegers\Mongodb\Model;
-
 class HistoryEntry extends Model
 {
     protected $collection = 'historyentries';
@@ -15,30 +13,14 @@ class HistoryEntry extends Model
      */
     protected $dates = ['time'];
 
-    /**
-     * Fix some key names to be more Eloquent-friendly.
-     */
-    public function setRawAttributes(array $attributes, $sync = false)
+    public function mediaM()
     {
-        if (isset($attributes['media'])) {
-            $attributes['media_id'] = $attributes['media'];
-            unset($attributes['media']);
-        }
-        if (isset($attributes['dj'])) {
-            $attributes['dj_id'] = $attributes['dj'];
-            unset($attributes['dj']);
-        }
-        return parent::setRawAttributes($attributes, $sync);
+        return $this->belongsTo('App\Media', 'media');
     }
 
-    public function media()
+    public function djM()
     {
-        return $this->belongsTo('App\Media', 'media_id');
-    }
-
-    public function dj()
-    {
-        return $this->belongsTo('App\User', 'dj_id');
+        return $this->belongsTo('App\User', 'dj');
     }
 
     public function score()
@@ -50,4 +32,5 @@ class HistoryEntry extends Model
     {
         return $this->embedsOne('App\HistoryEntryScore');
     }
+
 }

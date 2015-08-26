@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Jenssegers\Mongodb\Model;
-
 class User extends Model
 {
     protected $collection = 'users';

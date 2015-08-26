@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Jenssegers\Mongodb\Model;
-
 class Media extends Model
 {
     protected $collection = 'media';
@@ -11,5 +9,11 @@ class Media extends Model
     public function getFullTitleAttribute()
     {
         return $this->author . ' - ' . $this->title;
+    }
+
+    public function history()
+    {
+        return $this->hasMany('App\HistoryEntry', 'media', 'raw_id')
+            ->orderBy('time', 'desc');
     }
 }

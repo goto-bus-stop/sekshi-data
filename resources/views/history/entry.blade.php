@@ -1,8 +1,8 @@
 <div class="history-entry">
-    <img src="{{ $entry->media->image }}" alt="Image">
+    <img src="{{ $entry->mediaM->image }}" alt="Image">
     <div class="meta">
-        <span class="media">{{ $entry->media->full_title }}</span>
-        <span class="dj">{{ $entry->dj->username or '' }}</span>
+        <span class="media">{{ $entry->mediaM->full_title }}</span>
+        <span class="dj">{{ $entry->djM->username or '' }}</span>
         <span class="time">{{ $entry->time }}</span>
     </div>
     <div class="score">
