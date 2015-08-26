@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/history', function () {
+    return view('history.list', [
+        'entries' => App\HistoryEntry::orderBy('time', 'desc')->paginate(50)
+    ]);
+});
