@@ -4,7 +4,7 @@
     <div class="media">
         <h1>{{ $media->full_title }}</h1>
         <p>
-            This song was played {{ $history->count() }} times.
+            This song was played {{ $history->total() }} times.
         </p>
         @if ($lover)
             <p>{{ $lover->username }} loves this song the most: they played it {{ $loverCount }} times.</p>
