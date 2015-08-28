@@ -11,7 +11,7 @@
                 {{ $entry->djM->username or '?' }}
             @endif
         </span>
-        <time class="time" datetime="{{ $entry->time->toW3CString() }}">
+        <time class="time" datetime="{{ $entry->time ? $entry->time->toW3CString() : '' }}">
             {{ $entry->time or '0000-00-00 00:00:00' }}
         </time>
     </div>
