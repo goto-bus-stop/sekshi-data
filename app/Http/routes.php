@@ -15,58 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/emotes', function () {
-    return view('emotes.show', [
-        'emotes' => App\Emote::all()
-    ]);
-});
+Route::get('/emotes', 'EmoteController@index');
 
-Route::get('/history', function () {
-    return view('history.show', [
-        'entries' => App\HistoryEntry::orderBy('time', 'desc')
-                                     ->whereNotNull('media')
-                                     ->paginate(50)
-    ]);
-});
+Route::get('/history', 'HistoryController@index');
 
-Route::get('/media/{cid}', function ($cid) {
-    $media = App\Media::where('cid', '=', $cid)->first();
-    $mostPlayed = App\HistoryEntry::pipeline(
-        [ '$match' => [ 'media' => $media->raw_id ] ],
-        [ '$group' => [ '_id' => '$dj', 'count' => [ '$sum' => 1 ] ] ],
-        [ '$sort' => [ 'count' => -1 ] ],
-        [ '$limit' => 1 ]
-    )[0];
-    $lover = isset($mostPlayed['_id']) ? App\User::find($mostPlayed['_id']) : null;
-    return view('media.show', [
-        'media' => $media,
-        'history' => $media->history()->paginate(25),
-        'lover' => $lover,
-        'loverCount' => $lover ? $mostPlayed['count'] : 0
-    ]);
-});
+Route::get('/media/{cid}', 'MediaController@show');
 
-Route::get('/user/{slug}', function ($slug) {
-    $user = App\User::where('slug', '=', $slug)->first();
-    if (!$user && is_numeric($slug)) {
-        $user = App\User::find((int) $slug);
-    }
-
-    $mostPlayed = App\HistoryEntry::pipeline(
-        [ '$match' => [ 'dj' => $user->raw_id ] ],
-        [ '$group' => [ '_id' => '$media', 'count' => [ '$sum' => 1 ] ] ],
-        [ '$sort' => [ 'count' => -1 ] ],
-        [ '$limit' => 1 ]
-    )[0];
-    $favorite = isset($mostPlayed['_id']) ? App\Media::find($mostPlayed['_id']) : null;
-
-    $karma = $user->karma()->count();
-
-    return view('user.show', [
-        'user' => $user,
-        'history' => $user->history()->paginate(25),
-        'karma' => $karma,
-        'favorite' => $favorite,
-        'favoriteCount' => $favorite ? $mostPlayed['count'] : 0
-    ]);
-});
+Route::get('/user/{slug}', 'UserController@show');
