@@ -13,14 +13,30 @@ class HistoryController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  Request  $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $history = HistoryEntry::whereNotNull('media');
+        $sort = $request->input('sort');
+        switch ($sort) {
+        case 'woots':
+            $history->orderBy('score.positive', 'desc');
+            break;
+        case 'grabs':
+            $history->orderBy('score.grabs', 'desc');
+            break;
+        case 'mehs':
+            $history->orderBy('score.negative', 'desc');
+            break;
+        default:
+            $history->orderBy('time', 'desc');
+            break;
+        }
         return view('history.show', [
-            'entries' => HistoryEntry::orderBy('time', 'desc')
-                                     ->whereNotNull('media')
-                                     ->paginate(50)
+            'entries' => $history->paginate(50)
+                ->appends($sort ? ['sort' => $sort] : [])
         ]);
     }
 }
