@@ -33,7 +33,7 @@ class UserController extends Controller
         )[0];
         $favorite = isset($mostPlayed['_id']) ? Media::find($mostPlayed['_id']) : null;
 
-        $karma = $user->karma()->count();
+        $karma = $user->karma()->sum('amount');
 
         return view('user.show', [
             'user' => $user,
