@@ -34,7 +34,7 @@ class HistoryController extends Controller
             $history->orderBy('time', 'desc');
             break;
         }
-        return view('history.show', [
+        return view('history.index', [
             'entries' => $history->paginate(50)
                 ->appends($sort ? ['sort' => $sort] : [])
         ]);
