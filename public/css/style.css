@@ -32,6 +32,10 @@ a {
     .pagination > li:first-child > span { margin-left: 0; }
 /* /.pagination */
 
+.media-list {
+    max-width: 800px;
+}
+
 /* largely stolen from plug.dj :O */
 .media-item {
     position: relative;
@@ -79,6 +83,11 @@ a {
         color: #808691;
         text-align: right;
         font-weight: 400;
+    }
+    .media-item-meta .playcount {
+        left: 2px;
+        top: 39px;
+        width: 76%;
     }
 /* /.media-item-meta */
 
