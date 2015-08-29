@@ -33,105 +33,98 @@ a {
 /* /.pagination */
 
 /* largely stolen from plug.dj :O */
-.history-list {}
-    .history-list .history-list-row {
-        position: relative;
-        overflow: hidden;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 75px;
-    }
-    .history-list img {
-        position: relative;
-        float: left;
-        margin-top: 7px;
-        margin-left: 15px;
-        width: 80px;
-        height: 60px;
-    }
-    .history-list .meta {
-        position: relative;
-        margin-right: 10px;
-        margin-left: 107px;
-        width: auto;
-        height: 74px;
-    }
-        .history-list .meta > * {
-            position: absolute;
-            top: 15px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            font-size: 14px;
-        }
-        .history-list .meta .media {
-            left: 2px;
-            width: 76%;
-        }
-        .history-list .meta .dj {
-            right: 2px;
-            width: 20%;
-            text-align: right;
-        }
-        .history-list .meta .time {
-            top: 39px;
-            right: 2px;
-            color: #808691;
-            text-align: right;
-            font-weight: 400;
-        }
-    /* /.meta */
-    .history-list .score {
+.media-item {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 75px;
+}
+.media-item-image {
+    position: relative;
+    float: left;
+    margin-top: 7px;
+    margin-left: 15px;
+    width: 80px;
+    height: 60px;
+}
+.media-item-meta {
+    position: relative;
+    margin-right: 10px;
+    margin-left: 107px;
+    width: auto;
+    height: 74px;
+}
+    .media-item-meta > * {
         position: absolute;
-        top: 39px;
-        left: 109px;
-        width: 50%;
-        height: 24px;
-        font-weight: 400;
+        top: 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         font-size: 14px;
     }
-        .history-list .score > div {
-            position: relative;
-            float: left;
-            margin-right: 15px;
-        }
-            .history-list .score > div > * {
-                float: left;
-                position: relative;
-            }
-            .history-list .score > div i {
-                top: 4px;
-                margin-left: -3px;
-                margin-right: 5px;
-                width: 15px;
-                height: 15px;
-                background: transparent center center;
-            }
-        /* /> div */
-        .history-list .score .woots { color: #90ad2f; }
-            .history-list .score .woots .icon-woot {
-                background-image: url(../img/woot.png);
-            }
-        /* /.woots */
-        .history-list .score .grabs { color: #aa74ff; }
-            .history-list .score .grabs .icon-grab {
-                background-image: url(../img/grab.png);
-            }
-        /* /.grabs */
-        .history-list .score .mehs { color: #c42e3b; }
-            .history-list .score .mehs .icon-meh {
-                background-image: url(../img/meh.png);
-            }
-        /* /.mehs */
+    .media-item-meta .media {
+        left: 2px;
+        width: 76%;
+    }
+    .media-item-meta .dj {
+        right: 2px;
+        width: 20%;
+        text-align: right;
+    }
+    .media-item-meta .time {
+        top: 39px;
+        right: 2px;
+        color: #808691;
+        text-align: right;
+        font-weight: 400;
+    }
+/* /.media-item-meta */
 
-        .history-list .score .listeners { color: #eeeeee; }
-            .history-list .score .listeners .icon-listeners {
-                background-image: url(../img/listeners.png);
-            }
-        /* /.listeners */
-    /* /.score */
-/* /.history */
+.media-score {
+    position: absolute;
+    top: 39px;
+    left: 109px;
+    width: 50%;
+    height: 24px;
+    font-weight: 400;
+    font-size: 14px;
+}
+.media-score-type {
+    position: relative;
+    float: left;
+    margin-right: 15px;
+}
+    .media-score-type > * {
+        float: left;
+        position: relative;
+    }
+    .media-score-type i {
+        top: 4px;
+        margin-left: -3px;
+        margin-right: 5px;
+        width: 15px;
+        height: 15px;
+    }
+/* .media-score-type */
+.media-score-woots     { color: #90ad2f; }
+.media-score-grabs     { color: #aa74ff; }
+.media-score-mehs      { color: #c42e3b; }
+.media-score-listeners { color: #eeeeee; }
+
+.icon-woot {
+    background-image: url(../img/woot.png);
+}
+.icon-grab {
+    background-image: url(../img/grab.png);
+}
+.icon-meh {
+    background-image: url(../img/meh.png);
+}
+.icon-listeners {
+    background-image: url(../img/listeners.png);
+}
 
 .emotes {
     margin: auto;
