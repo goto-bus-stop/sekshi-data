@@ -56,11 +56,11 @@ class MediaController extends Controller
         $searches = collect([$artist]);
         if (preg_match('/^(.*?)\((.*?)\)$/', $artist, $matches)) {
             list ($full, $eng, $han) = $matches;
-            $searches[] = $eng;
-            $searches[] = $han;
+            $searches[] = trim($eng);
+            $searches[] = trim($han);
         }
-        $parts = $searches->map(function ($search) { return '\b' . preg_quote($search, '/') . '\b'; })->toArray();
-        $artistRegex = '/(' . implode('|', $parts) . ')/i';
+        $parts = $searches->map(function ($search) { return preg_quote($search, '/'); })->toArray();
+        $artistRegex = '/\b(' . implode('|', $parts) . ')\b/i';
         return Media::where('author', new \MongoRegex($artistRegex));
     }
 }
