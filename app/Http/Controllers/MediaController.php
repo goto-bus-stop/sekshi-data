@@ -59,7 +59,7 @@ class MediaController extends Controller
             $searches[] = $eng;
             $searches[] = $han;
         }
-        $parts = $searches->map(function ($search) { return preg_quote($search, '/'); })->toArray();
+        $parts = $searches->map(function ($search) { return '\b' . preg_quote($search, '/') . '\b'; })->toArray();
         $artistRegex = '/(' . implode('|', $parts) . ')/i';
         return Media::where('author', new \MongoRegex($artistRegex));
     }
