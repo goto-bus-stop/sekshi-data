@@ -23,7 +23,7 @@
                 they played it {{ $favoriteCount }} times.</p>
         @endif
 
-        <h2>Play History</h2>
+        <h2 id="history">Play History</h2>
         @include('history.list', ['entries' => $history])
     </div>
 @endsection

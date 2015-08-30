@@ -26,7 +26,7 @@
         @endif
 
         @if (count($similar) > 0)
-            <h2>Other Videos by {{ $media->author }}</h2>
+            <h2 id="similar">Other Videos by {{ $media->author }}</h2>
             <div class="media-thumbs">
                 @foreach ($similar as $m)
                     <a class="media-thumb" href="{{ url('media', $m->cid) }}" title="{{ $m->full_title }}">
@@ -37,7 +37,7 @@
             </div>
         @endif
 
-        <h2>Play History</h2>
+        <h2 id="history">Play History</h2>
         @include('history.list', ['entries' => $history])
     </div>
 @endsection
