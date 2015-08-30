@@ -122,6 +122,32 @@ a {
 .media-score-mehs      { color: #c42e3b; }
 .media-score-listeners { color: #eeeeee; }
 
+/* clearfix */
+.media-thumbs::after {
+    display: table;
+    content: " ";
+    clear: both;
+}
+.media-thumb {
+    display: block;
+    float: left;
+    width: 130px;
+    height: 120px;
+}
+.media-thumb-image {
+    width: 120px;
+    margin: 0 5px;
+    display: block;
+}
+.media-thumb-title {
+    width: 120px;
+    margin: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+
 .icon-woot {
     background-image: url(../img/woot.png);
 }

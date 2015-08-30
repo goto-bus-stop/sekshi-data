@@ -28,11 +28,39 @@ class MediaController extends Controller
             [ '$limit' => 1 ]
         )[0];
         $lover = isset($mostPlayed['_id']) ? User::find($mostPlayed['_id']) : null;
+        $loverCount = $lover ? $mostPlayed['count'] : 0;
+
+        $similar = $this->findSimilar($media)->get()->shuffle()->take(5);
+
+        $history = $media->history()->paginate(25);
+
         return view('media.show', [
             'media' => $media,
-            'history' => $media->history()->paginate(25),
+            'similar' => $similar,
+            'history' => $history,
             'lover' => $lover,
-            'loverCount' => $lover ? $mostPlayed['count'] : 0
+            'loverCount' => $loverCount
         ]);
+    }
+
+    /**
+     * Find different media items, possibly by the same artist.
+     *
+     * @param  App\Media $media
+     * @return Illuminate\Support\Collection
+     */
+    public function findSimilar(Media $media)
+    {
+        $artist = trim($media->author);
+        $matches = [];
+        $searches = collect([$artist]);
+        if (preg_match('/^(.*?)\((.*?)\)$/', $artist, $matches)) {
+            list ($full, $eng, $han) = $matches;
+            $searches[] = $eng;
+            $searches[] = $han;
+        }
+        $parts = $searches->map(function ($search) { return preg_quote($search, '/'); })->toArray();
+        $artistRegex = '/(' . implode('|', $parts) . ')/i';
+        return Media::where('author', new \MongoRegex($artistRegex));
     }
 }

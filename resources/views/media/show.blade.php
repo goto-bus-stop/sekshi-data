@@ -25,6 +25,18 @@
             </p>
         @endif
 
+        @if (count($similar) > 0)
+            <h2>Other Videos by {{ $media->author }}</h2>
+            <div class="media-thumbs">
+                @foreach ($similar as $m)
+                    <a class="media-thumb" href="{{ url('media', $m->cid) }}" title="{{ $m->full_title }}">
+                        <img class="media-thumb-image" src="{{ $m->image }}" alt="">
+                        <span class="media-thumb-title">{{ $m->title }}</span>
+                    </a>
+                @endforeach
+            </div>
+        @endif
+
         <h2>Play History</h2>
         @include('history.list', ['entries' => $history])
     </div>
