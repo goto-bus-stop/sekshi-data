@@ -61,6 +61,7 @@ class MediaController extends Controller
         }
         $parts = $searches->map(function ($search) { return preg_quote($search, '/'); })->toArray();
         $artistRegex = '/\b(' . implode('|', $parts) . ')\b/i';
-        return Media::where('author', new \MongoRegex($artistRegex));
+        return Media::where('author', 'regexp', $artistRegex)
+                    ->where('cid', '!=', $media->cid);
     }
 }
