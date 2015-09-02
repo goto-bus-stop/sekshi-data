@@ -13,6 +13,29 @@ use App\Http\Controllers\Controller;
 class MediaController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $media = Media::orderBy('author', 'asc')->orderBy('title', 'asc');
+        $search = $request->input('q');
+        if ($search) {
+            $rx = '/' . preg_quote($search) . '/i';
+            $media->where('author', 'regexp', $rx)
+                  ->orWhere('title', 'regexp', $rx);
+        }
+
+        $media->with('playcount');
+
+        return view('media.index', [
+            'list' => $media->paginate(50)
+        ]);
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param  string  $cid

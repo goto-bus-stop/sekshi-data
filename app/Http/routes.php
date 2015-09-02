@@ -20,6 +20,7 @@ Route::get('/emotes', 'EmoteController@index');
 Route::get('/history', 'HistoryController@index');
 Route::get('/most-played', 'HistoryController@mostPlayed');
 
+Route::get('/media', 'MediaController@index');
 Route::get('/media/{cid}', 'MediaController@show');
 
 Route::get('/user/{slug}', 'UserController@show');
