@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Relations\PlayCount;
+
 class Media extends Model
 {
     const YOUTUBE = 1;
@@ -41,5 +43,11 @@ class Media extends Model
     {
         return $this->hasMany('App\HistoryEntry', 'media', 'raw_id')
             ->orderBy('time', 'desc');
+    }
+
+    public function playcount()
+    {
+        $instance = new HistoryEntry;
+        return new PlayCount($instance->newQuery(), $this);
     }
 }
