@@ -72,7 +72,7 @@ a {
         left: 2px;
         width: 76%;
     }
-    .media-item-meta .dj {
+    .media-item-meta .dj, .media-item-meta .duration {
         right: 2px;
         width: 20%;
         text-align: right;
