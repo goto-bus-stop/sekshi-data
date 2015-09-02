@@ -34,13 +34,7 @@ class MediaController extends Controller
 
         $history = $media->history()->paginate(25);
 
-        return view('media.show', [
-            'media' => $media,
-            'similar' => $similar,
-            'history' => $history,
-            'lover' => $lover,
-            'loverCount' => $loverCount
-        ]);
+        return view('media.show', compact('media', 'similar', 'history', 'lover', 'loverCount'));
     }
 
     /**
