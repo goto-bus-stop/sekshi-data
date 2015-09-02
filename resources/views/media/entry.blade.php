@@ -15,5 +15,8 @@
                 since {{ $firstPlayed or '0000-00-00 00:00:00' }}
             </time>
         @endif
+        @if (isset($showDuration) && $showDuration)
+            <span class="duration">{{ duration($media->duration) }}</span>
+        @endif
     </div>
 </div>
