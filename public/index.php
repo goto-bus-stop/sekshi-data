@@ -35,6 +35,10 @@ require __DIR__.'/../bootstrap/autoload.php';
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+\Illuminate\Pagination\Paginator::presenter(function ($paginator) {
+    return new \App\Pagination\Presenter($paginator);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Run The Application
