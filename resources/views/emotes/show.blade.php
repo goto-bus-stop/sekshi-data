@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-    <table class="emotes">
+    <table class="EmoteList">
         <thead>
             <tr>
-                <th>Emote</th>
-                <th>Image</th>
+                <th class="EmoteList-column">Emote</th>
+                <th class="EmoteList-column">Image</th>
             </tr>
         </thead>
         <tbody>

@@ -10,7 +10,7 @@
     @if ($list->count() > 0)
         {!! $list->render() !!}
 
-        <div class="media-list">
+        <div class="MediaList">
             @foreach ($list as $m)
                 @include('media.entry', ['media' => $m, 'plays' => $m->playcount, 'showDuration' => true])
             @endforeach

@@ -1,22 +1,22 @@
-<div class="media-item" data-cid="{{ $media->cid }}">
-    <img class="media-item-image" src="{{ $media->image }}" alt="Image">
-    <div class="media-item-meta">
-        <a class="media" href="{{ url('media', $media->cid) }}">
+<div class="MediaItem" data-cid="{{ $media->cid }}">
+    <img class="MediaItem-image" src="{{ $media->image }}" alt="Image">
+    <div class="MediaItem-meta">
+        <a class="MediaItem-title" href="{{ url('media', $media->cid) }}">
             {{ $media->full_title }}
         </a>
         @if (isset($plays))
-            <span class="playcount">
+            <span class="MediaItem-playcount">
                 {{ $plays }} plays
             </span>
         @endif
         @if (isset($firstPlayed))
-            <time class="time"
+            <time class="MediaItem-time"
                   datetime="{{ $firstPlayed ? $firstPlayed->toW3CString() : '' }}">
                 since {{ $firstPlayed or '0000-00-00 00:00:00' }}
             </time>
         @endif
         @if (isset($showDuration) && $showDuration)
-            <span class="duration">{{ duration($media->duration) }}</span>
+            <span class="MediaItem-duration">{{ duration($media->duration) }}</span>
         @endif
     </div>
 </div>

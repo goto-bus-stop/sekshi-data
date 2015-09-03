@@ -1,6 +1,6 @@
 {!! $media->render() !!}
 
-<div class="media-list">
+<div class="MediaList">
     @foreach ($list as $m)
         @include('media.entry', ['media' => $m->media, 'firstPlayed' => $m->first_played, 'plays' => $m->plays])
     @endforeach

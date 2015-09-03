@@ -27,11 +27,11 @@
 
         @if (count($similar) > 0)
             <h2 id="similar">Other Videos by {{ $media->author }}</h2>
-            <div class="media-thumbs">
+            <div class="MediaThumbs">
                 @foreach ($similar as $m)
-                    <a class="media-thumb" href="{{ url('media', $m->cid) }}" title="{{ $m->full_title }}">
-                        <img class="media-thumb-image" src="{{ $m->image }}" alt="">
-                        <span class="media-thumb-title">{{ $m->title }}</span>
+                    <a class="MediaThumb" href="{{ url('media', $m->cid) }}" title="{{ $m->full_title }}">
+                        <img class="MediaThumb-image" src="{{ $m->image }}" alt="">
+                        <span class="MediaThumb-title">{{ $m->title }}</span>
                     </a>
                 @endforeach
             </div>
