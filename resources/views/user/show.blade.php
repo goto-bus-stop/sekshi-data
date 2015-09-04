@@ -45,6 +45,10 @@
         @endif
 
         <h2 id="history">Play History</h2>
-        @include('history.list', ['entries' => $history])
+        @if (count($history) > 0)
+            @include('history.list', ['entries' => $history])
+        @else
+            <p>This user has not played any songs.</p>
+        @endif
     </div>
 @endsection
