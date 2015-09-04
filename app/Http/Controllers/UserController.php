@@ -30,8 +30,8 @@ class UserController extends Controller
             [ '$group' => [ '_id' => '$media', 'count' => [ '$sum' => 1 ] ] ],
             [ '$sort' => [ 'count' => -1 ] ],
             [ '$limit' => 1 ]
-        )[0];
-        $favorite = isset($mostPlayed['_id']) ? Media::find($mostPlayed['_id']) : null;
+        );
+        $favorite = count($mostPlayed) > 0 ? Media::find($mostPlayed[0]['_id']) : null;
 
         $karma = $user->karma()->sum('amount');
         $achievements = $user->achievements()
@@ -46,7 +46,7 @@ class UserController extends Controller
             'karma' => $karma,
             'achievements' => $achievements,
             'favorite' => $favorite,
-            'favoriteCount' => $favorite ? $mostPlayed['count'] : 0
+            'favoriteCount' => $favorite ? $mostPlayed[0]['count'] : 0
         ]);
     }
 }
