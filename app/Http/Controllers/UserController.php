@@ -34,11 +34,17 @@ class UserController extends Controller
         $favorite = isset($mostPlayed['_id']) ? Media::find($mostPlayed['_id']) : null;
 
         $karma = $user->karma()->sum('amount');
+        $achievements = $user->achievements()
+            ->select('time', 'achievement')
+            ->with('achievementM')
+            ->orderBy('time', 'desc')
+            ->get();
 
         return view('user.show', [
             'user' => $user,
             'history' => $user->history()->paginate(25),
             'karma' => $karma,
+            'achievements' => $achievements,
             'favorite' => $favorite,
             'favoriteCount' => $favorite ? $mostPlayed['count'] : 0
         ]);

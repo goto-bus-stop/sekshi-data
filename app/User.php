@@ -25,4 +25,9 @@ class User extends Model
         return $this->hasMany('App\Karma', 'target', 'raw_id')
             ->orderBy('time', 'desc');
     }
+
+    public function achievements()
+    {
+        return $this->hasMany('App\AchievementUnlock', 'user', 'raw_id');
+    }
 }

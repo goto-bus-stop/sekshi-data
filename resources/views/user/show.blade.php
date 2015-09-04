@@ -23,6 +23,23 @@
                 they played it {{ $favoriteCount }} times.</p>
         @endif
 
+        <h2 id="achievements">Achievements</h2>
+        <ul class="AchievementShowcase">
+            @foreach ($achievements as $achievement)
+                <li class="AchievementThumb">
+                    <img class="AchievementThumb-image"
+                         src="{{ $achievement->achievementM->image }}"
+                         alt="{{ $achievement->achievementM->description }}"
+                         title="{{ str_finish($achievement->achievementM->description, '.') }}
+Unlocked: {{ $achievement->time }}">
+                    <time class="AchievementThumb-time"
+                          datetime="{{ $achievement->time->toW3CString() }}">
+                        Unlocked: {{ $achievement->time }}
+                    </time>
+                </li>
+            @endforeach
+        </ul>
+
         <h2 id="history">Play History</h2>
         @include('history.list', ['entries' => $history])
     </div>
