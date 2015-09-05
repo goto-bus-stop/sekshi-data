@@ -196,6 +196,9 @@ a {
 .UserList {
     max-width: 800px;
 }
+.UserList-header {
+    font-weight: bold;
+}
 
 .UserRow {
     box-sizing: border-box;
