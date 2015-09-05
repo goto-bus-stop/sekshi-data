@@ -98,7 +98,11 @@ class GenerateBadgeSprites extends Command
         ';
         foreach ($offsets as $name => $offset) {
             $css .= '.Badge--' . $name . ' { ';
-            $bgName = preg_match('/-\w$/', $name) ? substr($name, -1) : 'default';
+            $bgName = 'default';
+            if (str_contains($name, '-e')) $bgName = 'e';
+            if (str_contains($name, '-g')) $bgName = 'g';
+            if (str_contains($name, '-o')) $bgName = 'o';
+            if (str_contains($name, '-s')) $bgName = 's';
             $bg = $backgrounds[$bgName];
             if ($bgName !== 'default') {
                 $css .= 'background-image: url("' . $bg['url'] . '"); ';
