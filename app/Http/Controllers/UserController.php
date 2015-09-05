@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Media;
+use App\Karma;
 use App\HistoryEntry;
 use App\User;
 use App\Http\Requests;
@@ -32,8 +34,27 @@ class UserController extends Controller
 
         $paginate = null;
         switch ($request->input('sort')) {
+        case 'plays':
+            $byPlays = collect(HistoryEntry::pipeline(
+                ['$match' => ['dj' => ['$ne' => null], 'media' => ['$ne' => null]]],
+                ['$group' => ['_id' => '$dj', 'plays' => ['$sum' => 1]]],
+                ['$sort' => ['plays' => -1, '_id' => 1]],
+                ['$skip' => $pageSize * ($request->input('page', 1) - 1)],
+                ['$limit' => $pageSize]
+            ));
+            $paginate = $this->getPaginator($users, $byPlays, $request->input('page', 1));
+            break;
+        case 'karma':
+            $byKarma = collect(Karma::pipeline(
+                ['$group' => ['_id' => '$target', 'karma' => ['$sum' => '$amount']]],
+                ['$sort' => ['karma' => -1, '_id' => 1]],
+                ['$skip' => $pageSize * ($request->input('page', 1) - 1)],
+                ['$limit' => $pageSize]
+            ));
+            $paginate = $this->getPaginator($users, $byKarma, $request->input('page', 1));
+            break;
         default:
-            $users->orderBy('_id', 'asc');
+            $users->orderBy('username', 'asc');
             $paginate = $users->paginate($pageSize);
             break;
         }
@@ -42,6 +63,28 @@ class UserController extends Controller
         return view('user.index', [
             'users' => $paginate
         ]);
+    }
+
+    /**
+     * @param  \Illuminate\Database\Eloquent\Collection  $users
+     * @param  \Illuminate\Database\Eloquent\Collection  $sort
+     * @param  integer  $current
+     * @return \Illuminate\Pagination\Paginator
+     */
+    private function getPaginator($users, $sort, $current = 1)
+    {
+        $models = User::whereIn('_id', $sort->pluck('_id'))
+            ->with('playcount', 'totalKarma')
+            ->get();
+        $results = $sort->map(function ($rec) use ($models) {
+            return $models->whereLoose('id', $rec['_id'])->first();
+        });
+        return new LengthAwarePaginator(
+            $results->all(),
+            $users->count(),
+            50,
+            $current
+        );
     }
 
     /**
