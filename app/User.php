@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Relations\PlayCount;
+
 class User extends Model
 {
     protected $collection = 'users';
@@ -29,5 +31,11 @@ class User extends Model
     public function achievements()
     {
         return $this->hasMany('App\AchievementUnlock', 'user', 'raw_id');
+    }
+
+    public function playcount()
+    {
+        $instance = new HistoryEntry;
+        return new PlayCount($instance->newQuery(), $this, 'raw_id', 'dj');
     }
 }
