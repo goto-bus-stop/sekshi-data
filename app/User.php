@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Relations\PlayCount;
+use App\Relations\TotalKarma;
 
 class User extends Model
 {
@@ -26,6 +27,12 @@ class User extends Model
     {
         return $this->hasMany('App\Karma', 'target', 'raw_id')
             ->orderBy('time', 'desc');
+    }
+
+    public function totalKarma()
+    {
+        $instance = new Karma;
+        return new TotalKarma($instance->newQuery(), $this, 'raw_id', 'target');
     }
 
     public function achievements()
