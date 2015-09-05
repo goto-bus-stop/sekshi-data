@@ -28,7 +28,7 @@ class UserController extends Controller
             $users = User::where('username', 'regexp', '/' . preg_quote($search, '/') . '/i');
         }
 
-        $users->with('playcount');
+        $users->with('playcount', 'totalKarma');
 
         $paginate = null;
         switch ($request->input('sort')) {
