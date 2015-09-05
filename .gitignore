@@ -1,5 +1,7 @@
 /vendor
 /node_modules
+/public/css/badges.css
+/public/img/badges/
 Homestead.yaml
 Homestead.json
 .env

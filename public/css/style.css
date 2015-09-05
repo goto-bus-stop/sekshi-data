@@ -181,3 +181,8 @@ a {
 .AchievementThumb-time {
     margin-left: 10px;
 }
+
+.Badge {
+    width: 70px;
+    height: 70px;
+}
