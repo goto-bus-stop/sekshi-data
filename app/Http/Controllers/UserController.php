@@ -28,6 +28,8 @@ class UserController extends Controller
             $users = User::where('username', 'regexp', '/' . preg_quote($search, '/') . '/i');
         }
 
+        $users->with('playcount');
+
         $paginate = null;
         switch ($request->input('sort')) {
         default:
