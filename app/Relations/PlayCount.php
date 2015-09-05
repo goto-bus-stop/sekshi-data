@@ -111,7 +111,7 @@ class PlayCount extends Relation
         $results = $this->related->pipeline(
             ['$match' => [$this->localKey => ['$in' => $keys]]],
             ['$group' => [
-                '_id' => '$media',
+                '_id' => '$' . $this->localKey,
                 'playcount' => ['$sum' => 1]
             ]]
         );
