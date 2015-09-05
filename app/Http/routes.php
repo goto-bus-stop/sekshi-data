@@ -23,4 +23,5 @@ Route::get('/most-played', 'HistoryController@mostPlayed');
 Route::get('/media', 'MediaController@index');
 Route::get('/media/{cid}', 'MediaController@show');
 
+Route::get('/users', 'UserController@index');
 Route::get('/user/{slug}', 'UserController@show');
