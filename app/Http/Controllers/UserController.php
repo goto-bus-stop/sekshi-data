@@ -13,6 +13,36 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $pageSize = 50;
+        $users = User::whereNotNull('username');
+
+        $search = $request->input('q');
+        if ($search) {
+            $users = User::where('username', 'regexp', '/' . preg_quote($search, '/') . '/i');
+        }
+
+        $paginate = null;
+        switch ($request->input('sort')) {
+        default:
+            $users->orderBy('_id', 'asc');
+            $paginate = $users->paginate($pageSize);
+            break;
+        }
+        $paginate->setPath(action('UserController@index'));
+        $paginate->appends($request->except('page'));
+        return view('user.index', [
+            'users' => $paginate
+        ]);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  string  $slug
