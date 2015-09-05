@@ -3,22 +3,28 @@
 namespace App\Relations;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
  * Super hacky, but not terribly inefficient way of getting playcounts for a
  * collection of media items.
  */
-class PlayCount extends Relation
+class PlayCount extends GroupAggregateRelation
 {
     /**
-     * List of models that this relation is called on.
+     * Default relationship value.
      *
-     * @var array
+     * @var mixed
      */
-    protected $models;
+    protected $defaultValue = 0;
+
+    /**
+     * Property on the resulting MongoDB documents to use as the relationship
+     * value.
+     *
+     * @var string
+     */
+    protected $groupKey = 'playcount';
 
     /**
      * Create a new playcount "relationship" instance.
@@ -31,91 +37,17 @@ class PlayCount extends Relation
      */
     public function __construct(Builder $query, Model $parent, $foreignKey = 'raw_id', $localKey = 'media')
     {
-        $this->foreignKey = $foreignKey;
-        $this->localKey = $localKey;
-        parent::__construct($query, $parent);
+        parent::__construct($query, $parent, $foreignKey, $localKey);
     }
 
     /**
-     * Unused. (For now.)
+     * Get the MongoDB $group command for this relationship.
      */
-    public function addConstraints()
+    protected function getGroup()
     {
-        // unused
-    }
-
-    /**
-     * Unused. (For now.)
-     */
-    public function addEagerConstraints(array $models)
-    {
-        // unused
-    }
-
-    /**
-     * Unused. (For now.)
-     */
-    public function getResults()
-    {
-        // unused
-    }
-
-    /**
-     * Set default value for the relation on the models.
-     *
-     * @param  array  $models
-     * @param  string  $relation
-     * @return array
-     */
-    public function initRelation(array $models, $relation)
-    {
-        $this->models = $models;
-        foreach ($models as $model) {
-            $model->setRelation($relation, 0);
-        }
-        return $models;
-    }
-
-    /**
-     * Match playcounts to their parent models.
-     *
-     * @param  array  $models
-     * @param  \Illuminate\Database\Eloquent\Collection  $results
-     * @param  string  $relation
-     * @return array
-     */
-    public function match(array $models, Collection $results, $relation)
-    {
-        $dict = [];
-        foreach ($results as $result) {
-            $dict[(string) $result['_id']] = $result['playcount'];
-        }
-        foreach ($models as $model) {
-            $key = (string) $model->getAttribute($this->foreignKey);
-            if (array_has($dict, $key)) {
-                $model->setRelation($relation, $dict[$key]);
-            }
-        }
-        return $models;
-    }
-
-    /**
-     * Execute the query as a "select" statement.
-     *
-     * @param  array  $columns
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function get()
-    {
-        $keys = $this->getKeys($this->models, $this->foreignKey);
-        $results = $this->related->pipeline(
-            ['$match' => [$this->localKey => ['$in' => $keys]]],
-            ['$group' => [
-                '_id' => '$' . $this->localKey,
-                'playcount' => ['$sum' => 1]
-            ]]
-        );
-        // rather hacky, just to make sure that match() gets the right type
-        return new Collection($results);
+        return [
+            '_id' => '$' . $this->localKey,
+            'playcount' => ['$sum' => 1]
+        ];
     }
 }
