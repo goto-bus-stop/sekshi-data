@@ -1,0 +1,40 @@
+
+.UserList {
+    max-width: 800px;
+}
+.UserList-header {
+    font-weight: bold;
+}
+
+.UserRow {
+    box-sizing: border-box;
+    position: relative;
+    height: 30px;
+    padding: 2px;
+}
+.UserRow-badge {
+    width: 26px;
+    height: 26px;
+}
+.UserRow-info {
+    position: absolute;
+    left: 40px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 5px 0;
+}
+.UserRow-username {
+    position: absolute;
+    width: 66%;
+}
+.UserRow-playcount {
+    position: absolute;
+    width: 17%;
+    left: 66%;
+}
+.UserRow-karma {
+    position: absolute;
+    width: 17%;
+    left: 83%;
+}

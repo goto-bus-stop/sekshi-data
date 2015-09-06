@@ -1,0 +1,10 @@
+.Badge {
+    width: 70px;
+    height: 70px;
+}
+.Badge.Badge--none {
+    background: transparent;
+    box-sizing: border-box;
+    border: 2px solid #444A59;
+    border-radius: 50%;
+}

@@ -1,0 +1,16 @@
+.Icon {
+    width: 15px;
+    height: 15px;
+}
+.Icon--woot {
+    background-image: url(../img/woot.png);
+}
+.Icon--grab {
+    background-image: url(../img/grab.png);
+}
+.Icon--meh {
+    background-image: url(../img/meh.png);
+}
+.Icon--listeners {
+    background-image: url(../img/listeners.png);
+}

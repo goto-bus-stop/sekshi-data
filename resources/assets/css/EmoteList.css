@@ -1,0 +1,7 @@
+.EmoteList {
+    margin: auto;
+    margin-bottom: 100px;
+}
+.EmoteList-column {
+    min-width: 200px;
+}

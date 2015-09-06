@@ -1,0 +1,21 @@
+.Pagination {
+    padding-left: 0;
+}
+
+.PaginationItem {
+    display: inline;
+}
+.PaginationItem--active,
+.PaginationItem--disabled {
+    color: #767676;
+}
+
+.PaginationItem-text {
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #484848;
+    margin-left: -1px;
+}
+.PaginationItem-text--first {
+    margin-left: 0;
+}

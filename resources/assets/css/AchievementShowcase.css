@@ -1,0 +1,11 @@
+.AchievementShowcase {
+    padding: 0;
+    max-width: 800px;
+}
+.AchievementThumb {
+    display: inline-block;
+    width: 300px;
+}
+.AchievementThumb-time {
+    margin-left: 10px;
+}

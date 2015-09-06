@@ -1,0 +1,10 @@
+body {
+    font: 14px Roboto;
+    line-height: 1.4;
+    background-color: #262626;
+    color: #dadada;
+}
+
+a {
+    color: #fff;
+}

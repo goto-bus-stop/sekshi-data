@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        \App\Console\Commands\ConcatStyles::class,
         \App\Console\Commands\GenerateBadgeSprites::class
     ];
 
