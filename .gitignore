@@ -1,6 +1,7 @@
 /vendor
 /node_modules
 /public/css/badges.css
+/public/css/style.css
 /public/img/badges/
 Homestead.yaml
 Homestead.json
