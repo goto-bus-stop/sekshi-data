@@ -21,7 +21,8 @@ class HistoryController extends Controller
      */
     public function index(Request $request)
     {
-        $history = HistoryEntry::whereNotNull('media');
+        $history = HistoryEntry::whereNotNull('media')
+            ->with('djM', 'mediaM');
         $sort = $request->input('sort');
         switch ($sort) {
         case 'woots':
