@@ -50,4 +50,9 @@ class Media extends Model
         $instance = new HistoryEntry;
         return new PlayCount($instance->newQuery(), $this);
     }
+
+    public function blacklisted()
+    {
+        return $this->hasOne('App\BannedMedia', 'cid', 'cid');
+    }
 }

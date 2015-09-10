@@ -22,7 +22,7 @@ class HistoryController extends Controller
     public function index(Request $request)
     {
         $history = HistoryEntry::whereNotNull('media')
-            ->with('djM', 'mediaM');
+            ->with('djM', 'mediaM', 'mediaM.blacklisted');
         $sort = $request->input('sort');
         switch ($sort) {
         case 'woots':

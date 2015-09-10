@@ -28,12 +28,12 @@ class MediaController extends Controller
         }
 
         $media->with('playcount');
+        $media->with('blacklisted');
 
         return view('media.index', [
             'list' => $media->paginate(50)
         ]);
     }
-
 
     /**
      * Display the specified resource.

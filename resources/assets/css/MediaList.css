@@ -57,6 +57,15 @@
     width: 76%;
 }
 
+.MediaItemHeader {
+}
+.MediaItemHeader-blacklisted {
+    display: inline-block;
+    background: #c42e3b;
+    border-radius: 3px;
+    padding: 0 3px;
+}
+
 .MediaScoreGroup {
     position: absolute;
     top: 39px;
