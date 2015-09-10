@@ -1,9 +1,7 @@
 <div class="MediaItem history-list-row" data-entry-id="{{ $entry->id }}">
     <img class="MediaItem-image" src="{{ $entry->mediaM->image }}" alt="Image">
     <div class="MediaItem-meta">
-        <a class="MediaItem-title" href="{{ url('media', $entry->mediaM->cid) }}">
-            {{ $entry->mediaM->full_title }}
-        </a>
+        @include('media.item_header', ['classes' => 'MediaItem-title', 'media' => $entry->mediaM])
         <span class="MediaItem-dj">
             @if (!is_null($entry->djM))
                 <a href="{{ user_url($entry->djM) }}">{{ $entry->djM->username or '?' }}</a>

@@ -1,9 +1,7 @@
 <div class="MediaItem" data-cid="{{ $media->cid }}">
     <img class="MediaItem-image" src="{{ $media->image }}" alt="Image">
     <div class="MediaItem-meta">
-        <a class="MediaItem-title" href="{{ url('media', $media->cid) }}">
-            {{ $media->full_title }}
-        </a>
+        @include('media.item_header', ['classes' => 'MediaItem-title', 'media' => $media])
         @if (isset($plays))
             <span class="MediaItem-playcount">
                 {{ $plays }} plays
