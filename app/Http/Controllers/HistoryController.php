@@ -24,23 +24,26 @@ class HistoryController extends Controller
         $history = HistoryEntry::whereNotNull('media')
             ->with('djM', 'mediaM', 'mediaM.blacklisted');
         $sort = $request->input('sort');
+        $order = 'desc';
         switch ($sort) {
         case 'woots':
-            $history->orderBy('score.positive', 'desc');
+            $history->orderBy('score.positive', $order);
             break;
         case 'grabs':
-            $history->orderBy('score.grabs', 'desc');
+            $history->orderBy('score.grabs', $order);
             break;
         case 'mehs':
-            $history->orderBy('score.negative', 'desc');
+            $history->orderBy('score.negative', $order);
             break;
         default:
-            $history->orderBy('time', 'desc');
+            $sort = 'time';
+            $history->orderBy('time', $order);
             break;
         }
         return view('history.index', [
+            'sort' => $sort,
             'entries' => $history->paginate(50)
-                ->appends($sort ? ['sort' => $sort] : [])
+                ->appends($sort !== 'time' ? ['sort' => $sort] : [])
         ]);
     }
 

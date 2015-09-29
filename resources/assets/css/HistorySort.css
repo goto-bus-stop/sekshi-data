@@ -1,0 +1,14 @@
+.HistorySort {
+}
+
+.HistorySort-sort {
+    margin-left: 5px;
+    text-decoration: none;
+}
+.HistorySort-sort--active {
+    font-weight: bold;
+}
+
+.HistorySort-icon {
+    display: inline-block;
+}
