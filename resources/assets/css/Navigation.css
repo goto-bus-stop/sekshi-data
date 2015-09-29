@@ -1,0 +1,16 @@
+.Navigation {
+}
+
+.NavList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.NavItem {
+    display: inline-block;
+    margin: 5px;
+}
+
+.NavItem--brand {
+    font-weight: bold;
+}
