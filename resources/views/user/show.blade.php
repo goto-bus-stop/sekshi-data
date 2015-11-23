@@ -28,15 +28,17 @@
             <ul class="AchievementShowcase">
                 @foreach ($achievements as $achievement)
                     <li class="AchievementThumb">
-                        <img class="AchievementThumb-image"
-                             src="{{ $achievement->achievementM->image }}"
-                             alt="{{ $achievement->achievementM->description }}"
-                             title="{{ str_finish($achievement->achievementM->description, '.') }}
-    Unlocked: {{ $achievement->time }}">
-                        <time class="AchievementThumb-time"
-                              datetime="{{ $achievement->time->toW3CString() }}">
-                            Unlocked: {{ $achievement->time }}
-                        </time>
+                        <a href="{{ action('AchievementController@show', $achievement->achievementM) }}">
+                            <img class="AchievementThumb-image"
+                                 src="{{ $achievement->achievementM->image }}"
+                                 alt="{{ $achievement->achievementM->description }}"
+                                 title="{{ str_finish($achievement->achievementM->description, '.') }}
+        Unlocked: {{ $achievement->time }}">
+                            <time class="AchievementThumb-time"
+                                  datetime="{{ $achievement->time->toW3CString() }}">
+                                Unlocked: {{ $achievement->time }}
+                            </time>
+                        </a>
                     </li>
                 @endforeach
             </ul>
