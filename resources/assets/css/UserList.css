@@ -38,3 +38,8 @@
     width: 17%;
     left: 83%;
 }
+.UserRow-unlockTime {
+    position: absolute;
+    width: 34%;
+    left: 66%;
+}

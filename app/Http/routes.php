@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/achievements', 'AchievementController@index');
+Route::get('/achievements/{id}', 'AchievementController@show');
+
 Route::get('/emotes', 'EmoteController@index');
 
 Route::get('/history', 'HistoryController@index');

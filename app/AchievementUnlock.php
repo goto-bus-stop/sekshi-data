@@ -22,4 +22,9 @@ class AchievementUnlock extends Model
     {
         return $this->belongsTo('App\User', 'giver');
     }
+
+    public function userM()
+    {
+        return $this->belongsTo('App\User', 'user');
+    }
 }
