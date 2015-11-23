@@ -22,6 +22,9 @@
                 <a href="{{ action('HistoryController@mostPlayed') }}">Most Played Songs</a>
             </li>
             <li class="NavItem">
+                <a href="{{ action('AchievementController@index') }}">Achievements</a>
+            </li>
+            <li class="NavItem">
                 <a href="{{ action('MediaController@index') }}">Known Media</a>
             </li>
         </ul>
