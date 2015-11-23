@@ -18,7 +18,7 @@ class EmoteController extends Controller
     public function index()
     {
         return view('emotes.show', [
-            'emotes' => Emote::all()
+            'emotes' => Emote::orderBy('_id', 'asc')->get()
         ]);
     }
 }
