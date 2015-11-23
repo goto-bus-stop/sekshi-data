@@ -1,6 +1,4 @@
 .Badge {
-    width: 70px;
-    height: 70px;
 }
 .Badge.Badge--none {
     background: transparent;
