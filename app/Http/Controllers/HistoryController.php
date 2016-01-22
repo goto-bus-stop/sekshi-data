@@ -26,19 +26,19 @@ class HistoryController extends Controller
         $sort = $request->input('sort');
         $order = 'desc';
         switch ($sort) {
-        case 'woots':
-            $history->orderBy('score.positive', $order);
-            break;
-        case 'grabs':
-            $history->orderBy('score.grabs', $order);
-            break;
-        case 'mehs':
-            $history->orderBy('score.negative', $order);
-            break;
-        default:
-            $sort = 'time';
-            $history->orderBy('time', $order);
-            break;
+            case 'woots':
+                $history->orderBy('score.positive', $order);
+                break;
+            case 'grabs':
+                $history->orderBy('score.grabs', $order);
+                break;
+            case 'mehs':
+                $history->orderBy('score.negative', $order);
+                break;
+            default:
+                $sort = 'time';
+                $history->orderBy('time', $order);
+                break;
         }
         return view('history.index', [
             'sort' => $sort,

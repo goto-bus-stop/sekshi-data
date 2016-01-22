@@ -132,4 +132,3 @@ abstract class GroupAggregateRelation extends Relation
      */
     abstract protected function getGroup();
 }
-

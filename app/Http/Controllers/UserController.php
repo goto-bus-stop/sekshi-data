@@ -36,37 +36,37 @@ class UserController extends Controller
 
         $paginate = null;
         switch ($request->input('sort')) {
-        case 'plays':
-            $sort = ['plays' => -1, '_id' => 1];
-            if ($order === 'asc') {
-                $sort = $this->reverse($sort);
-            }
-            $byPlays = collect(HistoryEntry::pipeline(
-                ['$match' => ['dj' => ['$ne' => null], 'media' => ['$ne' => null]]],
-                ['$group' => ['_id' => '$dj', 'plays' => ['$sum' => 1]]],
-                ['$sort' => $sort],
-                ['$skip' => $pageSize * ($request->input('page', 1) - 1)],
-                ['$limit' => $pageSize]
-            ));
-            $paginate = $this->getPaginator($users, $byPlays, $request->input('page', 1));
-            break;
-        case 'karma':
-            $sort = ['karma' => -1, '_id' => 1];
-            if ($order === 'asc') {
-                $sort = $this->reverse($sort);
-            }
-            $byKarma = collect(Karma::pipeline(
-                ['$group' => ['_id' => '$target', 'karma' => ['$sum' => '$amount']]],
-                ['$sort' => $sort],
-                ['$skip' => $pageSize * ($request->input('page', 1) - 1)],
-                ['$limit' => $pageSize]
-            ));
-            $paginate = $this->getPaginator($users, $byKarma, $request->input('page', 1));
-            break;
-        default:
-            $users->orderBy('username', $order === 'desc' ? 'desc' : 'asc');
-            $paginate = $users->paginate($pageSize);
-            break;
+            case 'plays':
+                $sort = ['plays' => -1, '_id' => 1];
+                if ($order === 'asc') {
+                    $sort = $this->reverse($sort);
+                }
+                $byPlays = collect(HistoryEntry::pipeline(
+                    ['$match' => ['dj' => ['$ne' => null], 'media' => ['$ne' => null]]],
+                    ['$group' => ['_id' => '$dj', 'plays' => ['$sum' => 1]]],
+                    ['$sort' => $sort],
+                    ['$skip' => $pageSize * ($request->input('page', 1) - 1)],
+                    ['$limit' => $pageSize]
+                ));
+                $paginate = $this->getPaginator($users, $byPlays, $request->input('page', 1));
+                break;
+            case 'karma':
+                $sort = ['karma' => -1, '_id' => 1];
+                if ($order === 'asc') {
+                    $sort = $this->reverse($sort);
+                }
+                $byKarma = collect(Karma::pipeline(
+                    ['$group' => ['_id' => '$target', 'karma' => ['$sum' => '$amount']]],
+                    ['$sort' => $sort],
+                    ['$skip' => $pageSize * ($request->input('page', 1) - 1)],
+                    ['$limit' => $pageSize]
+                ));
+                $paginate = $this->getPaginator($users, $byKarma, $request->input('page', 1));
+                break;
+            default:
+                $users->orderBy('username', $order === 'desc' ? 'desc' : 'asc');
+                $paginate = $users->paginate($pageSize);
+                break;
         }
         $paginate->setPath(action('UserController@index'));
         $paginate->appends($request->except('page'));

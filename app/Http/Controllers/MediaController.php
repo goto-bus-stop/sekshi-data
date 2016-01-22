@@ -76,7 +76,9 @@ class MediaController extends Controller
             $searches[] = trim($eng);
             $searches[] = trim($han);
         }
-        $parts = $searches->map(function ($search) { return preg_quote($search, '/'); })->toArray();
+        $parts = $searches->map(function ($search) {
+            return preg_quote($search, '/');
+        })->toArray();
         $artistRegex = '/\b(' . implode('|', $parts) . ')\b/i';
         return Media::where('author', 'regexp', $artistRegex)
                     ->where('cid', '!=', $media->cid);
